@@ -15,6 +15,9 @@ namespace MetaLib
     private:
         T* array;
 
+        size_t reservedSize = 0;
+        size_t vectorSize = 0;
+
         inline void reallocate()
         {
             T* tempArray = reinterpret_cast<T*>(new char[reservedSize * sizeof(T)]);
@@ -35,10 +38,8 @@ namespace MetaLib
         
         }
 
-    public:
 
-        size_t reservedSize = 0;
-        size_t vectorSize = 0;
+    public:
         
         // default constructor
         vector() noexcept
@@ -66,7 +67,7 @@ namespace MetaLib
 
         explicit vector(size_t n): reservedSize(n), vectorSize(n)
         {
-            std::cout << "parameterized constructor (size_t n) called\n";
+            std::cout << "parameterized constructor (size_t n) called " <<this<<"\n";
 
             array = reinterpret_cast<T*>(new char[reservedSize * sizeof(T)]);
 
