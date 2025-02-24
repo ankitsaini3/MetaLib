@@ -15,7 +15,6 @@ namespace MetaLib
     private:
         T* array;
 
-    private:
         inline void reallocate()
         {
             T* tempArray = reinterpret_cast<T*>(new char[reservedSize * sizeof(T)]);
@@ -40,8 +39,6 @@ namespace MetaLib
 
         size_t reservedSize = 0;
         size_t vectorSize = 0;
-
-    public:
         
         // default constructor
         vector() noexcept
@@ -52,7 +49,7 @@ namespace MetaLib
 
 
         // default destructor
-        ~vector()
+        ~vector() noexcept
         {
             std::cout << "default destructor called" << this <<"\n";
 
@@ -94,9 +91,6 @@ namespace MetaLib
 
         vector(const T* first, const T* last): reservedSize(last - first), vectorSize(reservedSize)
         {
-
-
-
             array = reinterpret_cast<T*>(new char[reservedSize * sizeof(T)]);
 
             for (size_t i = 0; i < vectorSize; ++i, ++first)
