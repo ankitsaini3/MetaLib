@@ -230,6 +230,38 @@ namespace MetaLib
         }
 
 
+        void push_back(const T& val)
+        {
+            if (vectorSize < reservedSize)
+            {
+                array[vectorSize] = T(val);
+                vectorSize++;
+            }
+            else
+            {
+                reservedSize = reservedSize * 2;
+                reallocate();
+
+                array[vectorSize] = T(val);
+                vectorSize++;
+            }
+        }
+        
+
+        void pop_back()
+        {
+            if (vectorSize == 0)
+            {
+                return;
+            }
+
+            array[vectorSize-1].~T();
+            array[vectorSize-1] = nullptr;
+
+            vectorSize--;
+        }
+
+
         bool operator==(const vector<T> &other) const
         {
             if (vectorSize != other.vectorSize)
